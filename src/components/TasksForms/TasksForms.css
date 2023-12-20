@@ -1,0 +1,83 @@
+/* TasksForms.css */
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.task-image-input {
+  width: 100px;
+  height: 100px;
+  background-color: #ddd;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+.coolinput {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.coolinput label.text {
+  font-size: 0.75rem;
+  color: #1677ff;
+  font-weight: 700;
+  position: relative;
+  top: 0.6rem;
+  margin: 0 0 0 4px;
+  padding: 0 3px;
+  background: #ffffff;
+  width: fit-content;
+}
+
+.coolinput input[type="text"].input,
+.coolinput textarea.input,
+.coolinput select.input {
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #ffffff;
+  margin: 5px 0;
+  box-sizing: border-box;
+}
+
+.coolinput input[type="text"].input:focus,
+.coolinput textarea.input:focus,
+.coolinput select.input:focus {
+  outline: none;
+  border-color: #1677ff;
+}
+
+.task-title-input {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Estilo específico para o campo de descrição */
+.task-description-input {
+  color: #666;
+}
+
+/* Estilo específico para o campo de status */
+.task-status-select {
+  color: #333;
+}
+
+/* Regras de mídia para telas menores */
+@media (max-width: 600px) {
+  .task-form {
+    max-width: 100%; /* Formulário ocupará a largura total da tela */
+    padding: 0 10px; /* Reduzido o preenchimento lateral para telas menores */
+  }
+}

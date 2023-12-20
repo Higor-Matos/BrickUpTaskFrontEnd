@@ -5,8 +5,9 @@
 
 .task-table th,
 .task-table td {
-  text-align: left;
+  text-align: center;
   padding: 8px;
+  font-family: "Roboto", sans-serif;
 }
 
 .task-table th {
@@ -18,8 +19,7 @@
 }
 
 .task-table .conclude-button {
-  /* Estilo do botão 'Concluir' */
-  background-color: #4caf50; /* Exemplo de cor */
+  background-color: #4caf50;
   color: white;
   padding: 5px 10px;
   border: none;
@@ -33,12 +33,10 @@
 }
 
 .task-table .image-icon {
-  /* Estilos para o ícone de imagem */
   cursor: pointer;
 }
 
 .task-table .edit-icon {
-  /* Estilos para o ícone de edição */
   cursor: pointer;
 }
 

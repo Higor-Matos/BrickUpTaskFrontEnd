@@ -1,21 +1,52 @@
-.card-principal {
+.card-enter-task {
   width: calc(100% - 40px);
   max-width: 1200px;
   height: calc(100vh - 40px);
-  margin: auto;
   background-color: #f8fbfe;
   border-radius: 8px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   overflow: auto;
   padding: 20px;
   box-sizing: border-box;
-  position: relative;
-  z-index: 1;
+  position: fixed; /* Mudar para fixed */
+  top: 50%; /* Centralizar verticalmente */
+  left: 50%; /* Centralizar horizontalmente */
+  transform: translate(-50%, -50%); /* Ajuste fino para centralização exata */
+  z-index: 100; /* Z-index alto para ficar acima de outros elementos */
   transition: box-shadow 0.3s ease;
   font-family: "Roboto", sans-serif;
+  animation: fadeIn 0.5s ease-out;
 }
 
-.card-principal:hover {
+/* Animação de fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 12px;
+  z-index: 101; /* Garante que o botão fique acima dos outros elementos no card */
+  transition: transform 0.2s ease; /* Animação suave */
+}
+
+.close-button:hover {
+  transform: scale(1.1); /* Efeito de zoom no hover */
+}
+
+.card-enter-task:hover {
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
 }
 
@@ -67,13 +98,4 @@
   position: absolute;
   top: 10px;
   right: 10px;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .card-principal {
-    width: calc(100% - 40px);
-    height: auto;
-    min-height: 50vh;
-  }
 }
