@@ -62,6 +62,12 @@
   background-color: #00ca4e;
 }
 
+.new-task-button-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .card-principal {
