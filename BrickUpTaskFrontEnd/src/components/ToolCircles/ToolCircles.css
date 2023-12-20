@@ -1,0 +1,42 @@
+.tools {
+  display: flex;
+  position: absolute;
+  top: 9px;
+  left: 9px;
+}
+
+.circle {
+  margin: 0 4px;
+  animation: pop 0.5s ease forwards;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.box {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.red {
+  background-color: #ff605c;
+}
+
+.yellow {
+  background-color: #ffbd44;
+}
+
+.green {
+  background-color: #00ca4e;
+}

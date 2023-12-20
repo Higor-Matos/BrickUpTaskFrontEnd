@@ -1,0 +1,72 @@
+.card-principal {
+  width: calc(100% - 40px);
+  max-width: 1200px;
+  height: calc(100vh - 40px);
+  margin: auto;
+  background-color: #f8fbfe;
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  overflow: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  transition: box-shadow 0.3s ease;
+}
+
+.card-principal:hover {
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para os círculos de ferramentas, mantidos no mesmo arquivo para conveniência */
+.tools {
+  display: flex;
+  position: absolute;
+  top: 9px;
+  right: 9px;
+}
+
+.circle {
+  margin: 0 4px;
+  animation: pop 0.5s ease forwards;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.box {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.red {
+  background-color: #ff605c;
+}
+
+.yellow {
+  background-color: #ffbd44;
+}
+
+.green {
+  background-color: #00ca4e;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .card-principal {
+    width: calc(100% - 40px);
+    height: auto;
+    min-height: 50vh;
+  }
+}
