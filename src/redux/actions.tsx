@@ -8,12 +8,12 @@ export const fetchTasksRequest = () => ({
   type: FETCH_TASKS_REQUEST,
 });
 
-export const fetchTasksSuccess = (tasks) => ({
+export const fetchTasksSuccess = (tasks: Task[]) => ({
   type: FETCH_TASKS_SUCCESS,
   payload: tasks,
 });
 
-export const fetchTasksFailure = (error) => ({
+export const fetchTasksFailure = (error: string) => ({
   type: FETCH_TASKS_FAILURE,
   payload: error,
 });

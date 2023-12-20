@@ -3,6 +3,7 @@ import {
   FETCH_TASKS_SUCCESS,
   FETCH_TASKS_FAILURE,
 } from "./actions";
+import { Action } from "./actions";
 
 const initialState = {
   loading: false,
@@ -10,7 +11,7 @@ const initialState = {
   error: null,
 };
 
-const TasksReducer = (state = initialState, action) => {
+const TasksReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case FETCH_TASKS_REQUEST:
       return { ...state, loading: true };

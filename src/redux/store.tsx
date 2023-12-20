@@ -1,15 +1,16 @@
-import { createStore, applyMiddleware } from "redux";
-import createSagaMiddleware from "redux-saga";
-import TasksReducer from "./TasksReducer";
-import tasksSaga from "./sagas";
+import { combineReducers } from "redux";
+import rootReducer from "./TasksReducer"; // Importe o rootReducer
+import rootSaga from "./sagas"; // Importe o rootSaga
 
-// Criar o middleware saga
-const sagaMiddleware = createSagaMiddleware();
+// Combine os reducers
+const rootReducerCombined = combineReducers({
+  tasks: rootReducer,
+});
 
-// Montar a store com o redutor e o middleware saga
-const store = createStore(TasksReducer, applyMiddleware(sagaMiddleware));
+// Montar a store com o rootReducer combinado
+const store = createStore(rootReducerCombined, applyMiddleware(sagaMiddleware));
 
 // Iniciar a saga
-sagaMiddleware.run(tasksSaga);
+sagaMiddleware.run(rootSaga);
 
 export default store;
