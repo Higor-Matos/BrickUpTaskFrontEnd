@@ -4,16 +4,20 @@ import { InboxOutlined } from "@ant-design/icons";
 
 const { Dragger } = Upload;
 
-const ImageInput = ({ onImageSelect }) => {
+interface ImageInputProps {
+  onImageSelect: (file: File) => void;
+}
+
+const ImageInput: React.FC<ImageInputProps> = ({ onImageSelect }) => {
   const props = {
     name: "file",
-    multiple: false, // Alterado para permitir apenas um arquivo por vez
-    beforeUpload: (file) => {
-      onImageSelect(file); // Armazena a imagem selecionada para uso posterior
-      return false; // Evita o upload automático
+    multiple: false,
+    beforeUpload: (file: File) => {
+      onImageSelect(file);
+      return false;
     },
     action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
-    onChange(info) {
+    onChange(info: any) {
       const { status } = info.file;
       if (status !== "uploading") {
         console.log(info.file, info.fileList);
@@ -24,7 +28,7 @@ const ImageInput = ({ onImageSelect }) => {
         message.error(`${info.file.name} file upload failed.`);
       }
     },
-    onDrop(e) {
+    onDrop(e: React.DragEvent<HTMLDivElement>) {
       console.log("Dropped files", e.dataTransfer.files);
     },
   };

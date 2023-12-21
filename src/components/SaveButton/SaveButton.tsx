@@ -1,9 +1,13 @@
 import React from "react";
-import "./SaveButton.css"; // Certifique-se de que este seja o caminho correto para o seu arquivo CSS
+import "./SaveButton.css";
 import { CloudOutlined } from "@ant-design/icons";
 
-const SaveButton = ({ color = "#00ad54" }) => {
-  const buttonStyle = { "--clr": color };
+interface SaveButtonProps {
+  color?: string;
+}
+
+const SaveButton: React.FC<SaveButtonProps> = ({ color = "#00ad54" }) => {
+  const buttonStyle = { "--clr": color } as React.CSSProperties;
 
   return (
     <button className="button" style={buttonStyle}>
