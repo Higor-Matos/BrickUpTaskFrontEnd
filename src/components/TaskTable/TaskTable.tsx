@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTasksRequest } from "../../redux/actions";
+import { fetchTasksRequest, fetchTaskImageRequest } from "../../redux/actions";
 import "./TaskTable.css";
 import {
   EditOutlined,
   CheckOutlined,
   PictureOutlined,
 } from "@ant-design/icons";
+import ImageModal from "./ImageModal"; // Certifique-se de que o caminho está correto
 
 // Definição do tipo para o estado das tarefas no Redux
 type TaskState = {
@@ -24,6 +25,7 @@ type Task = {
 };
 
 const TaskTable: React.FC = () => {
+  const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
   const dispatch = useDispatch();
   const { loading, tasks, error } = useSelector(
     (state: { tasks: TaskState }) => state.tasks
@@ -33,11 +35,16 @@ const TaskTable: React.FC = () => {
     dispatch(fetchTasksRequest());
   }, [dispatch]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  const handleImageClick = (taskId) => {
+    console.log("Clicou para buscar imagem da tarefa:", taskId);
+    setSelectedTaskId(taskId);
+    dispatch(fetchTaskImageRequest(taskId));
+  };
 
   return (
     <div>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
       {tasks && tasks.length > 0 ? (
         <table className="task-table">
           <thead>
@@ -55,10 +62,14 @@ const TaskTable: React.FC = () => {
                 <td>{task.title}</td>
                 <td>{task.status}</td>
                 <td>
-                  <span className="image-icon">
+                  <span
+                    className="image-icon"
+                    onClick={() => handleImageClick(task.taskId)}
+                  >
                     <PictureOutlined />
                   </span>
                 </td>
+
                 <td>
                   <span className="edit-icon">
                     <EditOutlined />
@@ -75,6 +86,12 @@ const TaskTable: React.FC = () => {
         </table>
       ) : (
         <p>Não há tarefas para mostrar 😞</p>
+      )}
+      {selectedTaskId && (
+        <ImageModal
+          taskId={selectedTaskId}
+          onClose={() => setSelectedTaskId(null)}
+        />
       )}
     </div>
   );

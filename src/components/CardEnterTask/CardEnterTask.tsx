@@ -3,17 +3,9 @@ import { CloseOutlined } from "@ant-design/icons";
 import "./CardEnterTask.css";
 import ToolCircles from "./../ToolCircles/ToolCircles";
 import TaskForm from "./../TasksForms/TaskForm";
+import "react-toastify/dist/ReactToastify.css";
 
-type CardEnterTaskProps = {
-  onClose: () => void;
-};
-
-const CardEnterTask: React.FC<CardEnterTaskProps> = ({ onClose }) => {
-  const handleSave = (formData: any) => {
-    console.log(formData);
-    onClose();
-  };
-
+const CardEnterTask = ({ onClose }) => {
   return (
     <div className="card-enter-task">
       <button className="close-button" onClick={onClose}>
@@ -21,7 +13,7 @@ const CardEnterTask: React.FC<CardEnterTaskProps> = ({ onClose }) => {
       </button>
       <ToolCircles />
       <h2>Nova Tarefa</h2>
-      <TaskForm onSave={handleSave} />
+      <TaskForm onSave={onClose} />
     </div>
   );
 };

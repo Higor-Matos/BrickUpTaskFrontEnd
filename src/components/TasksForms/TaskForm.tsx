@@ -1,15 +1,17 @@
-// TaskForm.js
 import React, { useState } from "react";
 import "./TasksForms.css";
+import { useDispatch } from "react-redux";
 import SaveButton from "./../SaveButton/SaveButton";
 import ImageInput from "./../ImageInput/ImageInput";
+import { createTaskRequest } from "../../redux/actions/index";
+import { toast } from "react-toastify";
+import { fetchTasksRequest } from "../../redux/actions";
 
-type TaskFormProps = {
-  onSave: (data: any) => void;
-};
+const TaskForm = ({ onSave }) => {
+  const dispatch = useDispatch();
 
-const TaskForm: React.FC<TaskFormProps> = ({ onSave }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleImageChange = (info: any) => {
     if (info.file.status !== "uploading") {
@@ -22,13 +24,41 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSave }) => {
     }
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleImageSelect = (file) => {
+    setSelectedImage(file);
+    console.log("Imagem selecionada:", file);
+  };
+
+  const handleSubmit = async (event) => {
+    // Declare a função como assíncrona
     event.preventDefault();
-    // Implemente a lógica de coleta de dados e chame onSave
-    onSave({
-      /* dados do formulário, incluindo a imagem */
-      image: selectedImage,
-    });
+    const title = event.target.taskTitle.value;
+    const description = event.target.taskDescription.value;
+    const status = event.target.taskStatus.value;
+
+    if (!title || !description || !selectedImage) {
+      toast.error(
+        "Por favor, preencha todos os campos e selecione uma imagem."
+      );
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      await dispatch(
+        createTaskRequest({ title, description, status, image: selectedImage })
+      );
+      dispatch(fetchTasksRequest());
+
+      toast.success("Tarefa salva com sucesso!");
+      onSave();
+    } catch (error) {
+      console.error("Erro ao salvar a tarefa:", error);
+      toast.error("Erro ao salvar a tarefa.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -59,7 +89,10 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSave }) => {
         />
       </div>
 
-      <ImageInput onChange={handleImageChange} />
+      <ImageInput
+        onChange={handleImageChange}
+        onImageSelect={handleImageSelect}
+      />
 
       <div className="coolinput">
         <label htmlFor="taskStatus" className="text">
@@ -75,7 +108,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSave }) => {
         </select>
       </div>
 
-      <SaveButton />
+      <SaveButton disabled={isSubmitting} />
     </form>
   );
 };

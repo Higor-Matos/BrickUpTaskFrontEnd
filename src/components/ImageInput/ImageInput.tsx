@@ -4,10 +4,14 @@ import { InboxOutlined } from "@ant-design/icons";
 
 const { Dragger } = Upload;
 
-const ImageInput = () => {
+const ImageInput = ({ onImageSelect }) => {
   const props = {
     name: "file",
     multiple: false, // Alterado para permitir apenas um arquivo por vez
+    beforeUpload: (file) => {
+      onImageSelect(file); // Armazena a imagem selecionada para uso posterior
+      return false; // Evita o upload automático
+    },
     action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
     onChange(info) {
       const { status } = info.file;

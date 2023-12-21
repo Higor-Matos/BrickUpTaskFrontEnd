@@ -27,6 +27,7 @@
   font-weight: 600;
   position: relative;
   overflow: hidden;
+
 }
 
 .button__icon {
@@ -35,6 +36,7 @@
   background-color: var(--clr);
   display: grid;
   place-items: center;
+  color: white
 }
 
 .button__text {
