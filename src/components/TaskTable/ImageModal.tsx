@@ -11,11 +11,11 @@ const ImageModal: React.FC<ImageModalProps> = ({ taskId, onClose }) => {
   const taskImages = useSelector((state: RootState) => state.tasks.taskImages);
   const imageData = taskImages[taskId];
 
-  if (!imageData) {
+  if (typeof imageData !== "string") {
     return null;
   }
 
-  const imageSrc = `data:image/png;base64,${imageData.imageData || imageData}`;
+  const imageSrc = `data:image/png;base64,${imageData}`;
 
   return (
     <div

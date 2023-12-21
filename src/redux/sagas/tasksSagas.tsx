@@ -3,7 +3,7 @@ import * as types from "../types/actionTypes";
 import * as actions from "../actions";
 
 // Saga para buscar tarefas
-function* fetchTasksSaga(action: { type: string }) {
+function* fetchTasksSaga() {
   try {
     const response = yield call(fetch, "http://localhost:8080/tasks");
     const data = yield response.json();
@@ -47,7 +47,7 @@ function* createTaskSaga(action: { type: string; payload: any }) {
       console.error("Falha ao criar task:", taskData.message);
       yield put(actions.createTaskFailure("Falha ao criar tarefa"));
     }
-  } catch (error) {
+  } catch (error: Error | string) {
     console.error("Erro na saga createTaskSaga:", error.message);
     yield put(actions.createTaskFailure(error.message));
   }
@@ -84,7 +84,7 @@ function* uploadImage({
       console.error("Falha ao enviar imagem:", uploadResponse.message);
       yield put(actions.uploadImageFailure("Falha ao enviar imagem"));
     }
-  } catch (error) {
+  } catch (error: Error | string) {
     console.error("Erro na saga uploadImage:", error.message);
     yield put(actions.uploadImageFailure(error.message));
   }
@@ -98,7 +98,7 @@ function convertToBase64(file: any): Promise<string> {
       reader.readAsDataURL(file);
       reader.onload = () => {
         console.log("Imagem convertida em Base64:", reader.result);
-        resolve(reader.result);
+        resolve(reader.result as string);
       };
       reader.onerror = (error) => reject(error);
     } else {
@@ -125,7 +125,7 @@ function* fetchTaskImageSaga(action: { type: string; payload: string }) {
       console.error("Falha ao buscar imagem:", imageData.message);
       yield put(actions.fetchTaskImageFailure("Falha ao buscar imagem"));
     }
-  } catch (error) {
+  } catch (error: Error | string) {
     console.error("Erro na saga fetchTaskImageSaga:", error.message);
     yield put(actions.fetchTaskImageFailure(error.message));
   }

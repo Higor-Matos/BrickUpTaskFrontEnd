@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./TasksForms.css";
 import { useDispatch } from "react-redux";
 import SaveButton from "./../SaveButton/SaveButton";
-import ImageInput, { ImageInputProps } from "./../ImageInput/ImageInput";
+import ImageInput from "./../ImageInput/ImageInput";
 import { createTaskRequest } from "../../redux/actions/index";
 import { toast } from "react-toastify";
 import { fetchTasksRequest } from "../../redux/actions";
@@ -17,7 +17,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSave }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleImageChange: ImageInputProps["onChange"] = (info) => {
+  const handleImageChange = (info: any) => {
     if (info.file.status !== "uploading") {
       console.log(info.file, info.fileList);
     }
@@ -28,7 +28,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onSave }) => {
     }
   };
 
-  const handleImageSelect: ImageInputProps["onImageSelect"] = (file) => {
+  const handleImageSelect = (file: File) => {
     setSelectedImage(file);
     console.log("Imagem selecionada:", file);
   };

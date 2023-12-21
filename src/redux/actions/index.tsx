@@ -1,6 +1,7 @@
+// Importe ou defina o tipo Task
 import * as types from "../types/actionTypes";
 
-// Task actions
+// Resto das ações do Redux
 export const fetchTasksRequest = () => ({ type: types.FETCH_TASKS_REQUEST });
 
 export const fetchTasksSuccess = (tasks: Task[]) => ({
