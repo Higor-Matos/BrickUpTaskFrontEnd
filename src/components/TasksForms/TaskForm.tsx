@@ -13,14 +13,14 @@ const TaskForm = ({ onSave }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleImageChange = (info: any) => {
+  const handleImageChange = (info) => {
     if (info.file.status !== "uploading") {
       console.log(info.file, info.fileList);
     }
     if (info.file.status === "done") {
-      message.success(`${info.file.name} arquivo carregado com sucesso.`);
+      toast.success(`${info.file.name} arquivo carregado com sucesso.`);
     } else if (info.file.status === "error") {
-      message.error(`${info.file.name} falha no carregamento do arquivo.`);
+      toast.error(`${info.file.name} falha no carregamento do arquivo.`);
     }
   };
 
@@ -30,7 +30,6 @@ const TaskForm = ({ onSave }) => {
   };
 
   const handleSubmit = async (event) => {
-    // Declare a função como assíncrona
     event.preventDefault();
     const title = event.target.taskTitle.value;
     const description = event.target.taskDescription.value;
@@ -70,7 +69,7 @@ const TaskForm = ({ onSave }) => {
         <input
           type="text"
           id="taskTitle"
-          name="title"
+          name="taskTitle"
           className="input task-title-input"
           placeholder="Escreva aqui..."
         />
@@ -83,7 +82,7 @@ const TaskForm = ({ onSave }) => {
         <input
           type="text"
           id="taskDescription"
-          name="description"
+          name="taskDescription" // Corrija o name para "taskDescription"
           className="input task-description-input"
           placeholder="Escreva aqui..."
         />
@@ -100,7 +99,7 @@ const TaskForm = ({ onSave }) => {
         </label>
         <select
           id="taskStatus"
-          name="status"
+          name="taskStatus"
           className="input task-status-select"
         >
           <option value="PENDENTE">Pendente</option>

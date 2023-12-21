@@ -7,7 +7,7 @@ import {
   CheckOutlined,
   PictureOutlined,
 } from "@ant-design/icons";
-import ImageModal from "./ImageModal"; // Certifique-se de que o caminho está correto
+import ImageModal from "./ImageModal";
 
 // Definição do tipo para o estado das tarefas no Redux
 type TaskState = {
@@ -21,11 +21,11 @@ type Task = {
   title: string;
   description: string;
   status: string;
-  taskId: number;
+  taskId: string; // Altere para tipo 'string' para corresponder aos tipos dos dados
 };
 
 const TaskTable: React.FC = () => {
-  const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
+  const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null); // Altere para tipo 'string'
   const dispatch = useDispatch();
   const { loading, tasks, error } = useSelector(
     (state: { tasks: TaskState }) => state.tasks
@@ -35,7 +35,7 @@ const TaskTable: React.FC = () => {
     dispatch(fetchTasksRequest());
   }, [dispatch]);
 
-  const handleImageClick = (taskId) => {
+  const handleImageClick = (taskId: string) => {
     console.log("Clicou para buscar imagem da tarefa:", taskId);
     setSelectedTaskId(taskId);
     dispatch(fetchTaskImageRequest(taskId));

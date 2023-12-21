@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { rootReducer } from "../../redux/reducers/index";
+import rootReducer from "../../redux/reducers/index";
 
 interface ImageModalProps {
   taskId: string;
