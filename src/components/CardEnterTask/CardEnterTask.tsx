@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { CloseOutlined } from "@ant-design/icons";
 import "./CardEnterTask.css";
 import ToolCircles from "./../ToolCircles/ToolCircles";

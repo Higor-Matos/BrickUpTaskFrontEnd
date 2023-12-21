@@ -1,8 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { rootReducer } from "../../redux/reducers/index";
 
-const ImageModal = ({ taskId, onClose }) => {
-  const taskImages = useSelector((state) => state.tasks.taskImages);
+interface ImageModalProps {
+  taskId: string;
+  onClose: () => void;
+}
+
+const ImageModal: React.FC<ImageModalProps> = ({ taskId, onClose }) => {
+  const taskImages = useSelector(
+    (state: rootReducer) => state.tasks.taskImages
+  );
   const imageData = taskImages[taskId];
 
   if (!imageData) {
@@ -23,14 +31,14 @@ const ImageModal = ({ taskId, onClose }) => {
         width: "100%",
         height: "100%",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
-        zIndex: 1000, // Alto z-index para sobrepor outros elementos
+        zIndex: 1000,
       }}
     >
       <div style={{ position: "relative" }}>
         <img
           src={imageSrc}
           alt="Task"
-          style={{ maxWidth: "90%", maxHeight: "90%", margin: "auto" }} // Margem para centralizar
+          style={{ maxWidth: "90%", maxHeight: "90%", margin: "auto" }}
         />
 
         <button
