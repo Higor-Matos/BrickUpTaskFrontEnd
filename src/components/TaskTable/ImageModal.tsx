@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import rootReducer from "../../redux/reducers/index";
+import { RootState } from "../../redux/store/index";
 
 interface ImageModalProps {
   taskId: string;
@@ -8,9 +8,7 @@ interface ImageModalProps {
 }
 
 const ImageModal: React.FC<ImageModalProps> = ({ taskId, onClose }) => {
-  const taskImages = useSelector(
-    (state: rootReducer) => state.tasks.taskImages
-  );
+  const taskImages = useSelector((state: RootState) => state.tasks.taskImages);
   const imageData = taskImages[taskId];
 
   if (!imageData) {

@@ -3,7 +3,7 @@ import * as types from "../types/actionTypes";
 import * as actions from "../actions";
 
 // Saga para buscar tarefas
-function* fetchTasksSaga(action) {
+function* fetchTasksSaga(action: { type: string }) {
   try {
     const response = yield call(fetch, "http://localhost:8080/tasks");
     const data = yield response.json();
@@ -18,7 +18,7 @@ function* fetchTasksSaga(action) {
 }
 
 // Saga para criar uma tarefa
-function* createTaskSaga(action) {
+function* createTaskSaga(action: { type: string; payload: any }) {
   try {
     const response = yield call(fetch, "http://localhost:8080/tasks", {
       method: "POST",
@@ -54,7 +54,13 @@ function* createTaskSaga(action) {
 }
 
 // Função para realizar o upload da imagem
-function* uploadImage({ imageData, taskId }) {
+function* uploadImage({
+  imageData,
+  taskId,
+}: {
+  imageData: any;
+  taskId: string;
+}) {
   try {
     // Remove o prefixo data:image/png;base64, da string base64
     const base64Image = yield call(convertToBase64, imageData);
@@ -85,7 +91,7 @@ function* uploadImage({ imageData, taskId }) {
 }
 
 // Função para converter imagem para Base64
-function convertToBase64(file) {
+function convertToBase64(file: any): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     if (file) {
@@ -101,7 +107,7 @@ function convertToBase64(file) {
   });
 }
 
-function* fetchTaskImageSaga(action) {
+function* fetchTaskImageSaga(action: { type: string; payload: string }) {
   try {
     console.log("Buscando imagem para a tarefa com ID:", action.payload);
     const response = yield call(

@@ -2,18 +2,22 @@ import React, { useState } from "react";
 import "./TasksForms.css";
 import { useDispatch } from "react-redux";
 import SaveButton from "./../SaveButton/SaveButton";
-import ImageInput from "./../ImageInput/ImageInput";
+import ImageInput, { ImageInputProps } from "./../ImageInput/ImageInput";
 import { createTaskRequest } from "../../redux/actions/index";
 import { toast } from "react-toastify";
 import { fetchTasksRequest } from "../../redux/actions";
 
-const TaskForm = ({ onSave }) => {
+interface TaskFormProps {
+  onSave: () => void;
+}
+
+const TaskForm: React.FC<TaskFormProps> = ({ onSave }) => {
   const dispatch = useDispatch();
 
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleImageChange = (info) => {
+  const handleImageChange: ImageInputProps["onChange"] = (info) => {
     if (info.file.status !== "uploading") {
       console.log(info.file, info.fileList);
     }
@@ -24,16 +28,16 @@ const TaskForm = ({ onSave }) => {
     }
   };
 
-  const handleImageSelect = (file) => {
+  const handleImageSelect: ImageInputProps["onImageSelect"] = (file) => {
     setSelectedImage(file);
     console.log("Imagem selecionada:", file);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const title = event.target.taskTitle.value;
-    const description = event.target.taskDescription.value;
-    const status = event.target.taskStatus.value;
+    const title = (event.target as any).taskTitle.value;
+    const description = (event.target as any).taskDescription.value;
+    const status = (event.target as any).taskStatus.value;
 
     if (!title || !description || !selectedImage) {
       toast.error(
@@ -82,7 +86,7 @@ const TaskForm = ({ onSave }) => {
         <input
           type="text"
           id="taskDescription"
-          name="taskDescription" // Corrija o name para "taskDescription"
+          name="taskDescription"
           className="input task-description-input"
           placeholder="Escreva aqui..."
         />

@@ -1,13 +1,22 @@
 import * as types from "../types/actionTypes";
 
-const initialState = {
+interface Task {}
+
+interface State {
+  loading: boolean;
+  tasks: Task[];
+  error: string | null;
+  taskImages: Record<string, string | undefined>;
+}
+
+const initialState: State = {
   loading: false,
   tasks: [],
   error: null,
   taskImages: {},
 };
 
-export const tasksReducer = (state = initialState, action) => {
+export const tasksReducer = (state: State = initialState, action: any) => {
   switch (action.type) {
     case types.FETCH_TASKS_REQUEST:
       return { ...state, loading: true };
